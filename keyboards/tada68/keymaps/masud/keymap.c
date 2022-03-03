@@ -1,7 +1,9 @@
 #include QMK_KEYBOARD_H
 
 enum CUSTOM_KEYCODES {
-    KC_GLHF = SAFE_RANGE,
+    KC_CUSTOM_START = SAFE_RANGE,
+    KC_GLHF         = KC_CUSTOM_START,
+    KC_CUSTOM_END,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -70,17 +72,28 @@ _______, _______, _______,                 _______,                             
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
-    if (keycode == KC_GLHF && record->event.pressed) {
-        // This keycode is for StarCraft II.
-        //
-        // The following sequence sends the "gl hf" message to all players in
-        // the game.
-
-        tap_code16(LSFT(KC_ENT));
-        SEND_STRING("gl hf\n");
-        return false;
+    if (keycode < KC_CUSTOM_START || keycode >= KC_CUSTOM_END) {
+        // outside of custom range, don't do any custom processing
+        return true;
     }
 
-    return true;
+    if (!record->event.pressed) {
+        // this is a key up event, don't do any custom processing
+        return true;
+    }
+
+    // emit shift+enter to begin message to all players
+    tap_code16(LSFT(KC_ENT));
+
+    // emit string based on custom keycode
+    switch (keycode) {
+        case KC_GLHF: SEND_STRING("gl hf"); break;
+    }
+
+    // emit enter to complete message
+    tap_code16(KC_ENT);
+
+    // don't do default processing
+    return false;
 }
 
