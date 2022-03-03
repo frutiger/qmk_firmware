@@ -3,6 +3,16 @@
 enum CUSTOM_KEYCODES {
     KC_CUSTOM_START = SAFE_RANGE,
     KC_GLHF         = KC_CUSTOM_START,
+    CB_LING,
+    CB_SEER,
+    CB_UNIMP,
+    CB_MUTA,
+    CB_LARVA,
+    CB_LOL,
+    CB_HYDRA,
+    CB_DRONE,
+    CB_DERP,
+    CB_SLEEP,
     KC_CUSTOM_END,
 };
 
@@ -65,8 +75,17 @@ _______, KC_LALT, KC_LGUI,                 _______,                             
 _______, KC_F1,   KC_F2,   KC_F3,    KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,  KC_INS , \
 _______, KC_GLHF, KC_UP,   _______,  _______, _______, _______, _______, _______, _______, _______, _______, KC_PAUS, KC_SCRL, KC_HOME, \
 _______, KC_LEFT, KC_DOWN, KC_RIGHT, _______, _______, _______, _______, _______, _______, _______, _______,          _______, KC_END,  \
-_______, _______, _______, BL_DOWN,  BL_TOGG, BL_UP,   _______, KC_VOLD, KC_VOLU, KC_MUTE, _______,          KC_BTN1, KC_MS_U, KC_BTN2, \
+_______, _______, _______, BL_DOWN,  BL_TOGG, BL_UP,   _______, KC_VOLD, KC_VOLU, KC_MUTE, MO(3),            KC_BTN1, KC_MS_U, KC_BTN2, \
 _______, _______, _______,                 _______,                               TO(0),   _______, TO(1),   KC_MS_L, KC_MS_D, KC_MS_R),
+
+  /* Carbot Layer */
+
+[3] = LAYOUT_ansi(
+_______, _______,  _______, _______,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+_______, CB_LING,  CB_MUTA, CB_HYDRA, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+_______, CB_DRONE, CB_SEER, CB_LARVA, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, \
+_______, CB_UNIMP, CB_LOL,  CB_SLEEP, CB_DERP, _______, _______, _______, _______, _______, _______,          _______, _______, _______, \
+_______, _______,  _______,                _______,                              _______, _______, _______, _______, _______, _______),
 
 };
 
@@ -87,7 +106,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
 
     // emit string based on custom keycode
     switch (keycode) {
-        case KC_GLHF: SEND_STRING("gl hf"); break;
+        case KC_GLHF:  SEND_STRING("gl hf");           break;
+        case CB_LING:  SEND_STRING("(cbzergling)");    break;
+        case CB_SEER:  SEND_STRING("(cboverseer)");    break;
+        case CB_UNIMP: SEND_STRING("(cbunimpressed)"); break;
+        case CB_MUTA:  SEND_STRING("(cbmuta)");        break;
+        case CB_LARVA: SEND_STRING("(cblarva)");       break;
+        case CB_LOL:   SEND_STRING("(cbinfestedlol)"); break;
+        case CB_HYDRA: SEND_STRING("(cbhydra)");       break;
+        case CB_DRONE: SEND_STRING("(cbdrone)");       break;
+        case CB_DERP:  SEND_STRING("(cbderp)");        break;
+        case CB_SLEEP: SEND_STRING("(cbsleep)");       break;
     }
 
     // emit enter to complete message
