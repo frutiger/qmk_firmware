@@ -13,31 +13,19 @@ enum {
     KC_CUSTOM_START = SAFE_RANGE,
     KC_TGLDSP       = KC_CUSTOM_START,
 
-    SC_GLHF,
-    SC_LING,
-    SC_SEER,
-    SC_UNIMP,
-    SC_MUTA,
-    SC_LARVA,
-    SC_LOL,
-    SC_HYDRA,
-    SC_DRONE,
-    SC_DERP,
-    SC_SLEEP,
-
     KC_CUSTOM_END,
 };
 
 // Tap Dance declarations
 enum {
-    LBKT,
-    RBKT,
+    LGA,
+    RGA,
 };
 
 // Tap Dance definitions
 tap_dance_action_t tap_dance_actions[] = {
-    [LBKT] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, S(KC_9)),
-    [RBKT] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, S(KC_0)),
+    [LGA] = ACTION_TAP_DANCE_DOUBLE(KC_LGUI, KC_LALT),
+    [RGA] = ACTION_TAP_DANCE_DOUBLE(KC_RGUI, KC_RALT),
 };
 
 const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -52,59 +40,59 @@ const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------------------------|  [  |    |  ]  |------------------------|
    * |LSft| Z | X | C | V | B |-----|    |-----| N | M | , | . | / |RSft|
    * `-----------------------/     /     \     \------------------------'
-   *        |LCtl|LGui|Lwr |/ Spc /       \Entr \| Rse|RGui|RCtl|
+   *        |LCtl|LAlt|Lwr |/ Spc /       \Entr \| Rse|RGui|RCtl|
    *        `--------------------'         '----''--------------'
    */
 [0] = LAYOUT(
-KC_GRV,  KC_1, KC_2, KC_3,    KC_4,    KC_5,                      KC_6,  KC_7,    KC_8,    KC_9,   KC_0,    KC_MINS,
-KC_TAB,  KC_Q, KC_W, KC_E,    KC_R,    KC_T,                      KC_Y,  KC_U,    KC_I,    KC_O,   KC_P,    KC_BSLS,
-KC_ESC,  KC_A, KC_S, KC_D,    KC_F,    KC_G,                      KC_H,  KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT,
-KC_LSFT, KC_Z, KC_X, KC_C,    KC_V,    KC_B,  TD(LBKT), TD(RBKT), KC_N,  KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-                     KC_LCTL, KC_LGUI, MO(2), KC_SPC,   KC_ENT,   MO(1), KC_RGUI, KC_RCTL
+KC_GRV,  KC_1, KC_2, KC_3,    KC_4,    KC_5,                    KC_6,  KC_7,    KC_8,    KC_9,   KC_0,    KC_MINS,
+KC_TAB,  KC_Q, KC_W, KC_E,    KC_R,    KC_T,                    KC_Y,  KC_U,    KC_I,    KC_O,   KC_P,    KC_BSLS,
+KC_ESC,  KC_A, KC_S, KC_D,    KC_F,    KC_G,                    KC_H,  KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT,
+KC_LSFT, KC_Z, KC_X, KC_C,    KC_V,    KC_B,  KC_LBRC, KC_RBRC, KC_N,  KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+                     KC_LCTL, KC_LALT, MO(2), KC_SPC,  KC_ENT,  MO(1), KC_RGUI, KC_RCTL
 ),
 
   /**
    * RAISE
    * ,------------------------.                ,------------------------.
-   * | `  | F1| F2| F3| F4| F5|                | F6| F7| F8| F9|F10|    |
+   * | `  | F1| F2| F3| F4| F5|                | F6| F7| F8| F9|F10|BOOT|
    * |------------------------|                |------------------------|
-   * |Tab |   |   |   | _ | + |                | = | - |   |   |   |    |
+   * |Tab |   |   |   | - |   |                |   |   |   |   |   | \  |
    * |------------------------|                |------------------------|
-   * |Esc |   |   |   | < | ( |-----.    ,-----| ) | > |   |   |   |TgDp|
+   * |Esc |   |   |   | ( | < |-----.    ,-----| > | ) |   |   |   |TgDp|
    * |------------------------|     |    |     |------------------------|
    * |LSft|   |   |   |   |   |-----|    |-----|   |   |   |   |   |RSft|
    * `-----------------------/     /     \     \------------------------'
-   *        |LCtl|LAlt|Lwr |/ Spc /       \Entr \| Rse|RGui|RCtl|
+   *        |LCtl|LGA |Del |/ Spc /       \Entr \| Rse| RGA|RCtl|
    *        `--------------------'         '----''--------------'
    */
 [1] = LAYOUT(
-_______, KC_F1,   KC_F2,   KC_F3,   KC_F4,      KC_F5,                       KC_F6,   KC_F7,     KC_F8,   KC_F9,   KC_F10,  XXXXXXX,
-_______, XXXXXXX, XXXXXXX, XXXXXXX, S(KC_MINS), S(KC_EQL),                   KC_EQL,  KC_MINS,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-_______, XXXXXXX, XXXXXXX, XXXXXXX, S(KC_COMM), S(KC_9),                     S(KC_0), S(KC_DOT), XXXXXXX, XXXXXXX, XXXXXXX, KC_TGLDSP,
-_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, _______,
-                           _______, KC_LALT,    KC_DEL,    _______, _______, _______, _______,   _______
+_______, KC_F1,   KC_F2,   KC_F3,   KC_F4,      KC_F5,                       KC_F6,     KC_F7,   KC_F8,   KC_F9,   KC_F10,  QK_BOOT,
+_______, XXXXXXX, XXXXXXX, XXXXXXX, KC_MINS,    XXXXXXX,                     XXXXXXX,   KC_EQL,  XXXXXXX, XXXXXXX, XXXXXXX, _______,
+_______, XXXXXXX, XXXXXXX, XXXXXXX, S(KC_9),    S(KC_COMM),                  S(KC_DOT), S(KC_0), XXXXXXX, XXXXXXX, XXXXXXX, KC_TGLDSP,
+_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+                           _______, _______,    KC_DEL,    _______, _______, _______,   _______, _______
 ),
 
   /**
    * LOWER
    * ,------------------------.                ,------------------------.
-   * | `  |   |CF5|CF6|CF7|CF8|                |   |   |   |   |   |    |
+   * | `  |   |   |   |   |   |                |   |   |   |   |   | -  |
    * |------------------------|                |------------------------|
-   * |Tab |   | F5| F6| F7| F8|                |Hme|PgD|PgU|End|   |    |
+   * |Tab |   |   |   |   |   |                |Hme|PgD|PgU|End|   | \  |
    * |------------------------|                |------------------------|
-   * |Esc |   |   |   |   |   |-----.    ,-----|Lft|Dwn| Up|Rgt|   |    |
+   * |Esc |   |   |   |   |   |-----.    ,-----|Lft|Dwn| Up|Rgt|   |TgDp|
    * |------------------------|     |    |     |------------------------|
    * |LSft|   |   |   |   |   |-----|    |-----|   |   |   |   |   |RSft|
    * `-----------------------/     /     \     \------------------------'
-   *        |LCtl|LGui|Lwr |/ Spc /       \Entr \| Rse|RAlt|RCtl|
+   *        |LCtl|LGA |Lwr |/ Spc /       \Entr \|Bksp| RGA|RCtl|
    *        `--------------------'         '----''--------------'
    */
 [2] = LAYOUT(
-_______, XXXXXXX,  C(KC_F5), C(KC_F6), C(KC_F7), C(KC_F8),                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-_______, SC_LARVA, KC_F5,    KC_F6,    KC_F7,    KC_F7,                      KC_HOME, KC_PGDN, KC_PGUP, KC_END,  XXXXXXX, XXXXXXX,
-_______, SC_LING,  SC_SEER,  SC_MUTA,  SC_GLHF,  SC_LOL,                     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX,
-_______, SC_HYDRA, SC_SLEEP, SC_DRONE, SC_UNIMP, SC_DERP,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-                             _______,  _______,  _______,  _______, _______, KC_BSPC, KC_RALT, _______
+_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_HOME, KC_PGDN, KC_PGUP, KC_END,  XXXXXXX, _______,
+_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, _______,
+_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+                           _______, _______, _______, _______, _______, KC_BSPC, _______, _______
 ),
 };
 
@@ -165,30 +153,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         // right hand side
         transaction_rpc_send(NOTIFY_TOGGLE_DISPLAY, 0, 0);
-    }
-    else {
-        // StarCraft action
-
-        // emit shift+enter to begin message to all players
-        tap_code16(LSFT(KC_ENT));
-
-        // emit string based on custom keycode
-        switch (keycode) {
-            case SC_GLHF:  send_string("gl hf");           break;
-            case SC_LING:  send_string("(cbzergling)");    break;
-            case SC_SEER:  send_string("(cboverseer)");    break;
-            case SC_UNIMP: send_string("(cbunimpressed)"); break;
-            case SC_MUTA:  send_string("(cbmuta)");        break;
-            case SC_LARVA: send_string("(cblarva)");       break;
-            case SC_LOL:   send_string("(cbinfestedlol)"); break;
-            case SC_HYDRA: send_string("(cbhydra)");       break;
-            case SC_DRONE: send_string("(cbdrone)");       break;
-            case SC_DERP:  send_string("(cbderp)");        break;
-            case SC_SLEEP: send_string("(cbsleep)");       break;
-        }
-
-        // emit enter to complete message
-        tap_code16(KC_ENT);
     }
 
     // we handled this event, don't do any standard processing
